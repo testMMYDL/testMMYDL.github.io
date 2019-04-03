@@ -107,9 +107,6 @@ class Classifier {
     const input = inputBuffer.toTensor();
     //console.log(input);
 
-    const predictOut = this.model.predict(input);
-    //console.log(predictOut.dataSync());
-
     const beginMs = performance.now();
     const predictOut = this.model.predict(input);
     //console.log(predictOut.dataSync());
