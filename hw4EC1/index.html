@@ -1,0 +1,25 @@
+
+<!doctype html>
+
+<body>
+  <style>
+    #textfield {
+      font-size: 120%;
+      width: 60%;
+      height: 200px;
+    }
+  </style>
+  <h1>
+    Color Predictor
+  </h1>
+  <div class="create-model">
+    <button id="load-model" style="display:none">Load model</button>
+  </div>
+  <div>
+    <textarea id="text-entry"></textarea>
+  </div>
+  <canvas id="myCanvas" width="150" height="150" style="border:1px solid #d3d3d3;">
+  <hr>
+  <script src='https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js'></script>
+  <script src='index.js'></script>
+</body>
