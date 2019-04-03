@@ -95,13 +95,13 @@ class Classifier {
   predict(text) {
     // Convert to lower case and remove all punctuations.
     const inputText =
-        text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split(' ');
+        text.trim().toLowerCase().replace(/(\.|\,|\!)/g, '').split('');
     // Look up word indices.
     const inputBuffer = tf.buffer([1, this.maxLen], 'float32');
     for (let i = 0; i < inputText.length; ++i) {
       const word = inputText[i];
       inputBuffer.set(this.wordIndex[word], 0, i);
-      console.log(word, this.wordIndex[word], inputBuffer);
+      //console.log(word, this.wordIndex[word], inputBuffer);
     }
     const input = inputBuffer.toTensor();
     //console.log(input);
