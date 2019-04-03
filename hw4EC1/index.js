@@ -42,7 +42,6 @@ function prepUI(predict) {
 }
 
 async function urlExists(url) {
-  status('Testing url ' + url);
   try {
     const response = await fetch(url, {method: 'HEAD'});
     return response.ok;
@@ -54,7 +53,6 @@ async function urlExists(url) {
 async function loadHostedPretrainedModel(url) {
   try {
     const model = await tf.loadLayersModel(url);
-    status('Done loading pretrained model.');
     disableLoadModelButtons();
     return model;
   } catch (err) {
@@ -63,7 +61,6 @@ async function loadHostedPretrainedModel(url) {
 }
 
 async function loadHostedMetadata(url) {
-  status('Loading metadata from ' + url);
   try {
     const metadataJson = await fetch(url);
     const metadata = await metadataJson.json();
