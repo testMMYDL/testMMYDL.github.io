@@ -30,16 +30,16 @@ function doPredict(predict) {
   const textField = document.getElementById('text-entry');
   const result = predict(textField.value);
   
-  var r = Math.round(result[0] * 255);
-  var g = Math.round(result[1] * 255);
-  var b = Math.round(result[2] * 255);
+  var r = Math.round(result.score[0] * 255);
+  var g = Math.round(result.score[1] * 255);
+  var b = Math.round(result.score[2] * 255);
   
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
   ctx.fillStyle = "rgba(" + r + ", " + g + ", " + b + ", 1)";
   ctx.fillRect(20, 20, 100, 100);
   
-  status("R, G, B: " + r + " " + g + " " + b)
+  status("R, G, B: " + r + " " + g + " " + b + ' elapsed: ' + result.elapsed.toFixed(3) + ' ms)')
 }
 
 function prepUI(predict) {
