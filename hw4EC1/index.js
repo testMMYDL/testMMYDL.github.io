@@ -12,6 +12,11 @@ function settextField(text, predict) {
   doPredict(predict);
 }
 
+function status(statusText) {
+  console.log(statusText);
+  document.getElementById('status').textContent = statusText;
+}
+
 function setPredictFunction(predict) {
   const textField = document.getElementById('text-entry');
   textField.addEventListener('input', () => doPredict(predict));
@@ -24,7 +29,6 @@ function disableLoadModelButtons() {
 function doPredict(predict) {
   const textField = document.getElementById('text-entry');
   const result = predict(textField.value);
-  console.log(result);
   
   var r = Math.round(result[0] * 255);
   var g = Math.round(result[1] * 255);
@@ -34,6 +38,8 @@ function doPredict(predict) {
   var ctx = c.getContext("2d");
   ctx.fillStyle = "rgba(" + r + ", " + g + ", " + b + ", 1)";
   ctx.fillRect(20, 20, 100, 100);
+  
+  status("R, G, B: " + r + " " + g + " " + b)
 }
 
 function prepUI(predict) {
@@ -103,10 +109,15 @@ class Classifier {
 
     const predictOut = this.model.predict(input);
     //console.log(predictOut.dataSync());
+
+    const beginMs = performance.now();
+    const predictOut = this.model.predict(input);
+    //console.log(predictOut.dataSync());
     const values = predictOut.dataSync();//[0];
     predictOut.dispose();
+    const endMs = performance.now();
 
-    return values;
+    return {score: values, elapsed: (endMs - beginMs)};
   }
 };
 
