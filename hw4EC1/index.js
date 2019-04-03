@@ -41,6 +41,9 @@ function doPredict(predict) {
 
 function prepUI(predict) {
   settextField("tensorflow orange", predict);
+  const button2 = document.getElementById('predict-button');
+  button2.addEventListener('click', () => doPredict(predict));
+  button2.style.display = 'inline-block';
 }
 
 async function urlExists(url) {
@@ -98,7 +101,7 @@ class Classifier {
     for (let i = 0; i < inputText.length; ++i) {
       const word = inputText[i];
       inputBuffer.set(this.wordIndex[word], 0, i);
-      //console.log(word, this.wordIndex[word], inputBuffer);
+      console.log(word, this.wordIndex[word], inputBuffer);
     }
     const input = inputBuffer.toTensor();
     //console.log(input);
@@ -117,16 +120,13 @@ class Classifier {
 async function setup() {
   if (await urlExists(HOSTED_URLS.model)) {
     const button1 = document.getElementById('load-model');
-    const button2 = document.getElementById('predict-button');
+    
     button1.addEventListener('click', async () => {
       const predictor = await new Classifier().init(HOSTED_URLS);
       prepUI(x => predictor.predict(x));
     });
     
-    button2.addEventListener('click', () => doPredict(predict));
-    
     button1.style.display = 'inline-block';
-    button2.style.display = 'inline-block';
   }
 }
 
