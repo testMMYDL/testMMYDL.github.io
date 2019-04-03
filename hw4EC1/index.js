@@ -36,6 +36,7 @@ function doPredict(predict) {
   
   var c = document.getElementById("myCanvas");
   var ctx = c.getContext("2d");
+  ctx.clearRect(20, 20, 100, 100);
   ctx.fillStyle = "rgba(" + r + ", " + g + ", " + b + ", 1)";
   ctx.fillRect(20, 20, 100, 100);
   
