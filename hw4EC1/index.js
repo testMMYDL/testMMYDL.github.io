@@ -17,10 +17,6 @@ function status(statusText) {
   document.getElementById('status').textContent = statusText;
 }
 
-function setPredictFunction(predict) {
-  const textField = document.getElementById('text-entry');
-  textField.addEventListener('input', () => doPredict(predict));
-}
 
 function disableLoadModelButtons() {
   document.getElementById('load-model').style.display = 'none';
@@ -44,7 +40,6 @@ function doPredict(predict) {
 }
 
 function prepUI(predict) {
-  setPredictFunction(predict);
   settextField("tensorflow orange", predict);
 }
 
@@ -121,12 +116,17 @@ class Classifier {
 
 async function setup() {
   if (await urlExists(HOSTED_URLS.model)) {
-    const button = document.getElementById('load-model');
-    button.addEventListener('click', async () => {
+    const button1 = document.getElementById('load-model');
+    const button2 = document.getElementById('predict-button');
+    button1.addEventListener('click', async () => {
       const predictor = await new Classifier().init(HOSTED_URLS);
       prepUI(x => predictor.predict(x));
     });
-    button.style.display = 'inline-block';
+    
+    button2.addEventListener('click', () => doPredict(predict));
+    
+    button1.style.display = 'inline-block';
+    button2.style.display = 'inline-block';
   }
 }
 
